@@ -1,0 +1,54 @@
+<%-include('../partials/header.ejs')%>
+
+<div class="flex items-center justify-between mb-5">
+  <h1 class="text-2xl font-medium text-gray-800">Book Lists</h1>
+  <a href="/add" class="bg-[#0dd6b8] py-1.5 px-3 text-white rounded">
+    Add New Book
+  </a>
+</div>
+<table class="w-full text-gray-700 text-center">
+  <thead>
+    <tr>
+      <th class="border py-1">No.</th>
+      <th class="border py-1">Book Title</th>
+      <th class="border py-1">Book Type</th>
+      <th class="border py-1">Author</th>
+      <th class="border py-1">Published Year</th>
+      <th class="border py-1">Stock</th>
+      <th class="border py-1">Price</th>
+      <th class="border py-1">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if (books.length>0){ books.forEach((book,i)=>{ %>
+    <tr>
+      <td class="border py-1 px-2"><%=i+1%></td>
+      <td class="border py-1 px-2"><%= book.name %></td>
+      <td class="border py-1 px-2"><%= book.booktype %></td>
+      <td class="border py-1 px-2"><%= book.author %></td>
+      <td class="border py-1 px-2"><%= book.pyear %></td>
+      <td class="border py-1 px-2"><%= book.stock %></td>
+      <td class="border py-1 px-2">₹ <%= book.price %></td>
+      <td class="border py-2 px-2">
+        <a
+          href="/edit/<%=book.id%>"
+          class="bg-[#0dd6a1] mr-1 inline-block text-lg px-1 text-white rounded"
+          ><i class="ri-edit-2-line"></i
+        ></a>
+        <a
+          href="/delete/<%=book.id%>"
+          class="bg-red-500 inline-block text-lg px-1 text-white rounded"
+          ><i class="ri-delete-bin-5-line"></i
+        ></a>
+      </td>
+    </tr>
+    <% }) } else{ %>
+    <tr>
+      <td colspan="8">No record found</td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%-include('../partials/footer.ejs')%>
